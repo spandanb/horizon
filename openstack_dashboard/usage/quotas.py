@@ -103,6 +103,8 @@ class QuotaUsage(dict):
 
     def update_available(self, name):
         """Updates the "available" metric for the given quota."""
+        if not 'quota' in self.usages[name]: 
+            self.usages[name]['quota'] = float('inf')
         available = self.usages[name]['quota'] - self.usages[name]['used']
         if available < 0:
             available = 0
