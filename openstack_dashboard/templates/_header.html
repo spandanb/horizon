@@ -28,7 +28,7 @@
   {% endwith %}
   </div>
 
-  {% with num_of_regions=request.user.available_services_regions|length %}
+  {% with num_of_regions=regions.available|length %}
   {% if num_of_regions > 1 %}
     <div id="services_region_switcher" class="dropdown switcher_bar" tabindex="1">
       <a class="dropdown-toggle" data-toggle="dropdown" href="#services_region_switcher">
@@ -37,8 +37,8 @@
 
       <ul id="services_regions_list" class="dropdown-menu">
         <li class='divider'></li>
-        {% for region in request.user.available_services_regions %}
-          <li><a href="{% url 'switch_services_region' region %}?next={{ request.horizon.panel.get_absolute_url }}">{{ region }}</a></li> 
+        {% for region in regions.available %} 
+         <li><a href="{% url 'switch_services_region' region.name %}?next={{ request.horizon.panel.get_absolute_url }}">{{region.name}}</a></li> 
         {% endfor %}
       </ul>
     </div>
@@ -62,6 +62,5 @@
 
   <a href="{% url 'logout' %}">{% trans "Sign Out" %}</a>
   {# include "horizon/common/_region_selector.html" #}
-  <span>{{ request.user.services_region }}</span>
 </div>
 

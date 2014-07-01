@@ -130,10 +130,9 @@ AVAILABLE_REGIONS = [
         ('EDGE-WT-1', 'EDGE-WT-1'),
         ('EDGE-CT-1', 'EDGE-CT-1'),
         ('CORE', 'CORE'),
-	('EDGE-TR-1', 'EDGE-TR-1'),
-	('EDGE-TR-2', 'EDGE-TR-2'),
-	('EDGE-MG-1', 'EDGE-MG-1'),
-	('EDGE-VC-1', 'EDGE-VC-1')
+    	('EDGE-TR-1', 'EDGE-TR-1'),
+    	('EDGE-MG-1', 'EDGE-MG-1'),
+    	('EDGE-VC-1', 'EDGE-VC-1')
 ]
 
 # Disable SSL certificate checks (useful for self-signed certificates):
