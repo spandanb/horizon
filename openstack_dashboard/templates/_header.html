@@ -38,7 +38,9 @@
       <ul id="services_regions_list" class="dropdown-menu">
         <li class='divider'></li>
         {% for region in regions.available %} 
-         <li><a href="{% url 'switch_services_region' region.name %}?next={{ request.horizon.panel.get_absolute_url }}">{{region.name}}</a></li> 
+          {% if region.name != request.user.services_region %}
+            <li><a href="{% url 'switch_services_region' region.name %}?next={{ request.horizon.panel.get_absolute_url }}">{{region.name}}</a></li> 
+          {% endif %}
         {% endfor %}
       </ul>
     </div>
