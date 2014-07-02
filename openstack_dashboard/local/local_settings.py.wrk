@@ -122,14 +122,14 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 OPENSTACK_HOST = "iam.savitestbed.ca"
 OPENSTACK_KEYSTONE_URL = "http://%s:5000/v2.0" % OPENSTACK_HOST
 OPENSTACK_KEYSTONE_DEFAULT_ROLE = "_member_"
-DEFAULT_REGION="EDGE-YK-1"
+DEFAULT_REGION="CORE"
 
 # For multiple regions uncomment this configuration, and add (endpoint, title).
 AVAILABLE_REGIONS = [ 
-        ('EDGE-YK-1', 'EDGE-YK-1'), 
+        ('CORE', 'CORE'),
         ('EDGE-WT-1', 'EDGE-WT-1'),
         ('EDGE-CT-1', 'EDGE-CT-1'),
-        ('CORE', 'CORE'),
+        ('EDGE-YK-1', 'EDGE-YK-1'), 
     	('EDGE-TR-1', 'EDGE-TR-1'),
     	('EDGE-MG-1', 'EDGE-MG-1'),
     	('EDGE-VC-1', 'EDGE-VC-1')
