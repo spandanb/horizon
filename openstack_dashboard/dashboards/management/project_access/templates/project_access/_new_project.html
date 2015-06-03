@@ -1,0 +1,28 @@
+{% extends "horizon/common/_modal_form.html" %}
+{% load i18n %}
+{% load url from future %}
+
+{% block form_id %}request_new_project_form{% endblock %}
+{% block form_action %}{% url 'horizon:management:project_access:create' %}{% endblock %}
+{% block form_attrs %}enctype="multipart/form-data"{% endblock %}
+
+{% block modal-header %}{% trans "Request a New Project" %}{% endblock %}
+
+{% block modal-body %}
+<div class="left">
+    <fieldset>
+    {% include "horizon/common/_form_fields.html" %}
+    </fieldset>
+</div>
+<div class="right">
+    <h3>{% trans "Description:" %}</h3>
+    <p>
+        {% trans "Specify the project you are requesting to be creating. Include a brief description, name of the principal in the project and the name of the institution you are affiliated with." %}
+    </p>
+</div>
+{% endblock %}
+
+{% block modal-footer %}
+  <input class="btn btn-primary pull-right" type="submit" value="{% trans "Request New Project" %}" />
+  <a href="{% url 'horizon:management:project_access:index' %}" class="btn secondary cancel close">{% trans "Cancel" %}</a>
+{% endblock %}

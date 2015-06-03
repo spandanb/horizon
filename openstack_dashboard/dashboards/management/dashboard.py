@@ -14,26 +14,24 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-from django import shortcuts
-from django.views.decorators import vary
+from django.utils.translation import ugettext_lazy as _
 
 import horizon
 
-from openstack_auth import views
+
+class ProjectPanels(horizon.PanelGroup):
+    name = _("Project")
+    slug = "project"
+    panels = ('project_access',)
 
 
-def get_user_home(user):
-    if user.is_superuser:
-        return horizon.get_dashboard('admin').get_absolute_url()
-    #return horizon.get_dashboard('project').get_absolute_url()
-    return horizon.get_dashboard('management').get_absolute_url()
+class Management(horizon.Dashboard):
+    name = _("Management")
+    slug = "management"
+    panels = (
+        ProjectPanels,)
+    default_panel = 'project_access'
+    supports_tenants = True
 
 
-@vary.vary_on_cookie
-def splash(request):
-    if request.user.is_authenticated():
-        return shortcuts.redirect(horizon.get_user_home(request.user))
-    form = views.Login(request)
-    request.session.clear()
-    request.session.set_test_cookie()
-    return shortcuts.render(request, 'splash.html', {'form': form})
+horizon.register(Management)

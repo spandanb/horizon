@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}{% trans "Request a New Project" %}{% endblock %}
+
+{% block page_header %}
+  {% include "horizon/common/_page_header.html" with title=_("Request a New Project ") %}
+{% endblock page_header %}
+
+{% block main %}
+  {% include 'project/images/images/_create.html' %}
+{% endblock %}

@@ -1,5 +1,9 @@
 # vim: tabstop=4 shiftwidth=4 softtabstop=4
 
+# Copyright 2012 United States Government as represented by the
+# Administrator of the National Aeronautics and Space Administration.
+# All Rights Reserved.
+#
 # Copyright 2012 Nebula, Inc.
 #
 #    Licensed under the Apache License, Version 2.0 (the "License"); you may
@@ -14,26 +18,16 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-from django import shortcuts
-from django.views.decorators import vary
+from django.utils.translation import ugettext_lazy as _
 
 import horizon
 
-from openstack_auth import views
+from openstack_dashboard.dashboards.management import dashboard
 
 
-def get_user_home(user):
-    if user.is_superuser:
-        return horizon.get_dashboard('admin').get_absolute_url()
-    #return horizon.get_dashboard('project').get_absolute_url()
-    return horizon.get_dashboard('management').get_absolute_url()
+class ProjectAccess(horizon.Panel):
+    name = _("Project Access")
+    slug = 'project_access'
 
 
-@vary.vary_on_cookie
-def splash(request):
-    if request.user.is_authenticated():
-        return shortcuts.redirect(horizon.get_user_home(request.user))
-    form = views.Login(request)
-    request.session.clear()
-    request.session.set_test_cookie()
-    return shortcuts.render(request, 'splash.html', {'form': form})
+dashboard.Management.register(ProjectAccess)

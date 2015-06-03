@@ -75,6 +75,28 @@ except ImportError:
     pass
 
 
+def get_keystone_client():
+    from keystoneclient.v2_0 import client 
+
+    username = getattr(settings, 'OPENSTACK_KEYSTONE_USERNAME')
+    password = getattr(settings, 'OPENSTACK_KEYSTONE_PASSWORD')
+    endpoint_url = getattr(settings, 'OPENSTACK_KEYSTONE_URL')
+    tenant = getattr(settings, 'OPENSTACK_KEYSTONE_TENANT')
+    keystone = client.Client(username=username,
+                                  password=password,
+                                  tenant_name=tenant,
+                                  auth_url=endpoint_url)
+    return keystone
+
+def list_projects():
+    keystone = get_keystone_client() 
+    return keystone.tenants.list()
+
+def get_user_email(user_id):
+    keystone = get_keystone_client() 
+    return keystone.users.get(user_id).email
+
+
 class Service(base.APIDictWrapper):
     """Wrapper for a dict based on the service data from keystone."""
     _attrs = ['id', 'type', 'name']
