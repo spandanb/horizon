@@ -20,19 +20,19 @@ def send_email(msg_type, msg_dict):
                 "requested to create a project called {0[project]}. "
                 "The purpose of the project is to: {0[description]}. "
                 "The user is affiliated with {0[institution]}. The principal "
-                "in this project is {0[principal]})").format(msg_dict)
+                "in this project is {0[principal]}.").format(msg_dict)
     
     elif msg_type == "leave":
         SUBJECT= "[HORIZON] Request to Leave Project"
         TEXT = ("Hello admin, \n{0[username]} ({0[user_id]}) "
                 "requested to leave project "
-                "{0[project]} ({0[project_id]}").format(msg_dict)
+                "{0[project]} ({0[project_id]}.").format(msg_dict)
 
     elif msg_type == "join":
         SUBJECT = "[HORIZON] Request to Join Project"
         TEXT = ("Hello admin, \n{0[username]} ({0[user_id]}) "
                 "requested to join project "
-                " {0[project]} ({0[project_id]})").format(msg_dict)
+                " {0[project]} ({0[project_id]}).").format(msg_dict)
 
     # Prepare email 
     message = """\From: %s\nTo: %s\nSubject: %s\n\n%s
