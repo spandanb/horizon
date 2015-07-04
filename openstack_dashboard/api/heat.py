@@ -41,7 +41,8 @@ def heatclient(request, password=None):
         'insecure': insecure,
         'ca_file': cacert,
         'username': request.user.username,
-        'password': password
+        'password': password,
+        'region_name': request.user.services_region,
         #'timeout': args.timeout,
         #'ca_file': args.ca_file,
         #'cert_file': args.cert_file,
