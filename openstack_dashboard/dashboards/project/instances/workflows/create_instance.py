@@ -752,7 +752,7 @@ class LaunchInstance(workflows.Workflow):
                                    availability_zone=avail_zone,
                                    instance_count=int(context['count']),
                                    admin_pass=context['admin_pass'],
-                                   disk_config=context['disk_config']
+                                   disk_config=context['disk_config'],
                                    scheduler_hints = {'force_hosts':context['force_hosts']})
             return True
         except Exception:
