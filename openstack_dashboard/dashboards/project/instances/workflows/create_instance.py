@@ -634,6 +634,9 @@ class SetAdvancedAction(workflows.Action):
     disk_config = forms.ChoiceField(label=_("Disk Partition"),
                                     required=False)
 
+    force_hosts  = forms.CharField(label=_("Force Hosts"),
+                           max_length=255, required=False)
+
     def __init__(self, request, *args, **kwargs):
         super(SetAdvancedAction, self).__init__(request, *args, **kwargs)
         # Set our disk_config choices
@@ -648,7 +651,7 @@ class SetAdvancedAction(workflows.Action):
 
 class SetAdvanced(workflows.Step):
     action_class = SetAdvancedAction
-    contributes = ("disk_config",)
+    contributes = ("disk_config","force_hosts",)
 
 
 class LaunchInstance(workflows.Workflow):
@@ -749,7 +752,8 @@ class LaunchInstance(workflows.Workflow):
                                    availability_zone=avail_zone,
                                    instance_count=int(context['count']),
                                    admin_pass=context['admin_pass'],
-                                   disk_config=context['disk_config'])
+                                   disk_config=context['disk_config']
+                                   scheduler_hints = {'force_hosts':context['force_hosts']})
             return True
         except Exception:
             exceptions.handle(request)
